@@ -30,6 +30,7 @@ from fewshot_utils import (
     seed_everything,
     setup_logger,
     task_loss,
+    to_device,
 )
 
 
@@ -124,6 +125,7 @@ def main() -> None:
             for i, batch in enumerate(loader):
                 if i >= args.eval_episodes:
                     break
+                batch = to_device(batch, device)
                 output, *_ = model(
                     batch["supp_imgs"], batch["supp_mask"],
                     batch["qry_imgs"], batch["qry_mask"], train=False,

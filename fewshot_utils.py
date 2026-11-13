@@ -177,6 +177,22 @@ def resolve_device(gpu: int = 0) -> torch.device:
     return torch.device("cpu")
 
 
+def to_device(obj, device: torch.device, non_blocking: bool = True):
+    """Recursively move tensors (incl. nested lists/tuples/dicts) to ``device``.
+
+    Non-tensor leaves (e.g. file names) are returned unchanged.
+    """
+    if torch.is_tensor(obj):
+        return obj.to(device, non_blocking=non_blocking)
+    if isinstance(obj, list):
+        return [to_device(o, device, non_blocking) for o in obj]
+    if isinstance(obj, tuple):
+        return tuple(to_device(o, device, non_blocking) for o in obj)
+    if isinstance(obj, dict):
+        return {k: to_device(v, device, non_blocking) for k, v in obj.items()}
+    return obj
+
+
 def bf16_supported() -> bool:
     try:
         return torch.cuda.is_available() and torch.cuda.is_bf16_supported()

@@ -25,6 +25,7 @@ from fewshot_utils import (
     seed_everything,
     setup_logger,
     task_loss,
+    to_device,
 )
 
 
@@ -108,6 +109,7 @@ def quick_eval(model, args, device, logger) -> str:
     for i, batch in enumerate(loader):
         if i >= args.eval_episodes:
             break
+        batch = to_device(batch, device)
         output, *_ = model(
             batch["supp_imgs"], batch["supp_mask"], batch["qry_imgs"], batch["qry_mask"],
             train=False,
@@ -208,6 +210,7 @@ def main() -> None:
                         args.split, len(loader.dataset.files),
                         len(loader.dataset), args.num_workers)
             for batch in loader:
+                batch = to_device(batch, device)
                 with torch.autocast(device_type=device.type, dtype=amp_dtype, enabled=use_amp):
                     output, align_loss, mse_loss, loss_qry, contrastive_loss = model(
                         batch["supp_imgs"], batch["supp_mask"], batch["qry_imgs"],
