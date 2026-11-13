@@ -28,7 +28,7 @@ GPU_ID="${GPU_ID:-${GPUID:-0}}"
 SEED="${SEED:-1234}"
 N_STEPS="${N_STEPS:-30000}"
 BATCH_SIZE="${BATCH_SIZE:-1}"            # must stay 1 for MGPD-Net
-NUM_WORKERS="${NUM_WORKERS:-${N_WORKERS:-2}}"
+NUM_WORKERS="${NUM_WORKERS:-${N_WORKERS:-8}}"
 N_WAYS="${N_WAYS:-1}"
 N_SHOTS="${N_SHOTS:-${N_SHOT:-1}}"
 N_QUERIES="${N_QUERIES:-${N_QUERY:-1}}"
@@ -37,9 +37,9 @@ MOMENTUM="${MOMENTUM:-0.9}"
 WEIGHT_DECAY="${WEIGHT_DECAY:-${WD:-5e-4}}"
 LR_GAMMA="${LR_GAMMA:-0.80}"
 AMP="${AMP:-auto}"                       # auto|fp16|bf16|none
-VAL_INTERVAL="${VAL_INTERVAL:-${EVAL_INTERVAL:-200}}"  # steps between val (0=off)
-VAL_STEPS="${VAL_STEPS:-${EVAL_EPISODES:-1000}}"         # val episodes per run
-INPUT_SIZE="${INPUT_SIZE:-${IMG_SIZE:-512}}"            # square resize
+VAL_INTERVAL="${VAL_INTERVAL:-${EVAL_INTERVAL:-1000}}"  # steps between val (0=off)
+VAL_STEPS="${VAL_STEPS:-${EVAL_EPISODES:-100}}"         # val episodes per run
+INPUT_SIZE="${INPUT_SIZE:-${IMG_SIZE:-128}}"            # square resize
 MAX_ITER="${MAX_ITER:-1000}"             # epoch size (episodes per reload)
 
 # --- Loss weights -----------------------------------------------------------
