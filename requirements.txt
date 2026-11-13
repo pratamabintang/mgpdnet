@@ -1,0 +1,22 @@
+# MGPD-Net / Landslide4Sense few-shot segmentation
+# Install: pip install -r requirements.txt
+# CPU-only torch: pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+
+# --- core (dataloaders, train.py, test.py, fewshot_utils.py) ---
+torch>=2.0
+torchvision>=0.15
+numpy>=1.22
+h5py>=3.7
+
+# --- required by models/fewshot.py top-level imports ---
+opencv-python>=4.5     # also used by data augmentation (--aug-rotation)
+matplotlib>=3.5
+
+# --- optional ---
+# psutil>=5.9          # richer RAM reporting in the logger (falls back to /proc/meminfo)
+
+# --- optional: only needed if you also run the original config.py pipeline ---
+# sacred==0.8.2
+# SimpleITK>=2.0
+# scikit-image>=0.18
+# nibabel>=2.5

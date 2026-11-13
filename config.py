@@ -84,6 +84,7 @@ def cfg():
         'CHAOST2': {'data_dir': 'data/CHAOST2'},
         'SABS': {'data_dir': 'data/SABS'},
         'CMR': {'data_dir': 'data/CMR'},
+        'Landslide4Sense': {'data_dir': 'datasets/landslide4sense'},
     }
 
 

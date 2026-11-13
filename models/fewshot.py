@@ -9,7 +9,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.nn.parameter import Parameter
 
-from .attention import MultiHeadAttention, MultiLayerPerceptron, SELayer
 from .encoder import Res101Encoder
 
 
@@ -109,7 +108,7 @@ class GraphAttentionLayer(nn.Module):
         f_dst = torch.matmul(Wh, self.a_dst)  # (N, 1)
         e = self.leakyrelu(f_src + f_dst.T)  # Broadcast addition to (N, N)
 
-        zero_vec = -9e15 * torch.ones_like(e)
+        zero_vec = torch.finfo(e.dtype).min * torch.ones_like(e)
         attention = torch.where(adj > 0, e, zero_vec)
         attention = attention * adj
 

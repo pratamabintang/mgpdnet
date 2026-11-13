@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# Downloaded pretrained weights / model checkpoints
+checkpoints/
+*.pth
+*.pt
+
+# Training outputs
+runs/
+exps_*/
+exps_on_*/
+snapshots/
+*.log
+
+# Dataset files (h5 patches are large; bring your own copy)
+datasets/**/*.h5
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
